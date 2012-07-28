@@ -35,7 +35,7 @@ public class MainActivity extends Activity {
 	EditText password;
 	String email_s;
 	String password_s;
-	String url = Global.getInstance().getDevelopment();
+	String url = Global.getInstance().getProduction();
 	
 	public void validate(View view) throws JSONException{
 		Resources res = getResources();
