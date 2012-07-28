@@ -76,7 +76,7 @@ public class Registro extends Activity {
 		        HttpResponse response = httpclient.execute(httppost);
 	    		int status = response.getStatusLine().getStatusCode();
 	
-	    		if(status == 201){
+	    		if(status == 200 || status == 201){
 	    			HttpEntity e = response.getEntity();
 	    			String data = EntityUtils.toString(e);
 	    			data = "["+data+"]";
