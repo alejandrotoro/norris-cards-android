@@ -9,5 +9,12 @@
     <string name="email_blank">Escribe tu correo electrónico.</string>
     <string name="password_blank">Escribe tu contraseña.</string>
     <string name="connection_error">Error de conexión, por favor inténtalo mas tarde.</string>
+    <string name="crear_partida">Crear nueva partida</string>
+    <string name="buscar_partida">Buscar partidas abiertas</string>
+    <string name="ver_barajas">Ver barajas</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_crear_partida">CrearPartidaActivity</string>
+    <string name="title_activity_buscar_partidas">BuscarPartidasActivity</string>
 
 </resources>
