@@ -36,7 +36,7 @@ public class Registro extends Activity {
 	String email_s;
 	String password_s;
 	String v_password_s;
-	String url = Global.getInstance().getDevelopment();
+	String url = Global.getInstance().getProduction();
 	
 	public void goBack(View view){
 		Intent intent = new Intent(Registro.this, MainActivity.class);
