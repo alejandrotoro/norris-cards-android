@@ -8,6 +8,7 @@ public class Global {
 	private String development = "http://192.168.0.11:3000";
 	private String userEmail;
 	private Integer userId;
+	private Integer barajaId;
 	
 	private Global(){
 		
@@ -43,4 +44,13 @@ public class Global {
 	public void setUserId(Integer id) {
 		this.userId = id;
 	}
+
+	public Integer getBarajaId() {
+		return barajaId;
+	}
+
+	public void setBarajaId(Integer barajaId) {
+		this.barajaId = barajaId;
+	}
+	
 }

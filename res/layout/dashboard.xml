@@ -11,13 +11,32 @@
 	    android:orientation="vertical"
 	    android:gravity="top"
 	    android:padding="10dp" >
-        
-        <Button 
-            android:id="@+id/settings_btn"
-            android:layout_width="wrap_content"
+        
+        <Button
+            android:id="@+id/btnCrearPartida"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="S"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:text="@string/crear_partida"
+            android:textSize="20dp" />
+        
+        <Button
+            android:id="@+id/btnBuscarPartidas"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:text="@string/buscar_partida"
+            android:textSize="20dp" />
+        
+        <Button
+            android:id="@+id/btnVerBarajas"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:text="@string/ver_barajas"
             android:textSize="20dp" />
         
     </LinearLayout>
