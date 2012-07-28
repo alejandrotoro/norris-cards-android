@@ -35,7 +35,7 @@ public class MainActivity extends Activity {
 	EditText password;
 	String email_s;
 	String password_s;
-	String url = Global.getInstance().getProduction();
+	String url = Global.getInstance().getDevelopment();
 	
 	public void validate(View view) throws JSONException{
 		Resources res = getResources();
@@ -54,11 +54,9 @@ public class MainActivity extends Activity {
 			message = res.getString(R.string.password_blank);
 			error(message);
 		}else{
-			/** login(email_s); */
-		    // Create a new HttpClient and Post Header
 		    HttpClient httpclient = new DefaultHttpClient();
 		    
-		    String auth = url+"/users/sign_in";
+		    String auth = url+"/users/sign_in.json";
 		    HttpPost httppost = new HttpPost(auth);
 		    try {
 		    	List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
@@ -66,18 +64,16 @@ public class MainActivity extends Activity {
 		    	nameValuePairs.add(new BasicNameValuePair("user[password]", password_s));
 		        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 	
-		        // Execute HTTP Post Request
 		        HttpResponse response = httpclient.execute(httppost);
 	    		int status = response.getStatusLine().getStatusCode();
 	
 	    		if(status == 200){
-	    			/**
 	    			HttpEntity e = response.getEntity();
 	    			String data = EntityUtils.toString(e);
 	    			data = "["+data+"]";
 	    			JSONArray a = new JSONArray(data);
 	    			JSONObject datos = a.getJSONObject(0);
-	    			**/
+	    			Global.getInstance().setUserId(datos.getInt("id"));
 	    			login();
 	    		}else {
 	    			HttpEntity e = response.getEntity();
@@ -104,6 +100,11 @@ public class MainActivity extends Activity {
 		Vibrator vibrar = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 		vibrar.vibrate(800);
 		Toast.makeText(this, error, Toast.LENGTH_LONG).show();
+	}
+	
+	public void registro(View view){
+		Intent intent = new Intent(MainActivity.this, Registro.class);
+		startActivity(intent);
 	}
 	
     /** Called when the activity is first created. */

@@ -4,14 +4,8 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:paddingTop="20dp" >
-    
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/bienvenido"
-        android:gravity="center_horizontal"
-        android:textSize="20dp" />
+    android:paddingTop="15dp"
+    android:background="@drawable/login_480x640" >
     
     <LinearLayout 
 	    android:layout_width="fill_parent"
@@ -26,7 +20,8 @@
 	        android:text="@string/email"
 	        android:gravity="center_horizontal"
 	        android:textSize="20dp"
-	        android:layout_marginBottom="10dp" />
+	        android:layout_marginBottom="10dp"
+	        android:textColor="#024102" />
         
         <EditText 
             android:id="@+id/email_field"
@@ -41,7 +36,8 @@
 	        android:text="@string/password"
 	        android:gravity="center_horizontal"
 	        android:textSize="20dp"
-	        android:layout_marginBottom="10dp" />
+	        android:layout_marginBottom="10dp"
+	        android:textColor="#024102" />
         
         <EditText 
             android:id="@+id/password_field"
@@ -58,6 +54,15 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="@string/ingresar"
+            android:textSize="20dp" />
+        
+        <Button 
+            android:id="@+id/register_btn"
+            android:onClick="registro"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/registro"
             android:textSize="20dp" />
         
     </LinearLayout>
