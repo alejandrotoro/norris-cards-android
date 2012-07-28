@@ -15,11 +15,12 @@
     <string name="ver_barajas">Ver barajas</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_crear_partida">CrearPartidaActivity</string>
-    <string name="title_activity_buscar_partidas">BuscarPartidasActivity</string>
+    <string name="title_activity_crear_partida">Crear partida</string>
+    <string name="title_activity_buscar_partidas">Buscar partidas</string>
     <string name="registro">Registro</string>
     <string name="incorrects">Email o Contraseña incorrectos</string>
     <string name="pass_missmatch">Las contraseñas deben coincidir</string>
     <string name="email_missmatch">Tu correo no existe, regístrate!</string>
+    <string name="seleccione_partida">Seleccione una partida para iniciar el juego</string>
 
 </resources>
