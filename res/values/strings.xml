@@ -22,5 +22,6 @@
     <string name="pass_missmatch">Las contraseñas deben coincidir</string>
     <string name="email_missmatch">Tu correo no existe, regístrate!</string>
     <string name="seleccione_partida">Seleccione una partida para iniciar el juego</string>
+    <string name="error_nopartidas">No hay partidas creadas</string>
 
 </resources>

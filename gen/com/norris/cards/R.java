@@ -60,6 +60,7 @@ public final class R {
         public static final int email=0x7f050002;
         public static final int email_blank=0x7f050006;
         public static final int email_missmatch=0x7f050013;
+        public static final int error_nopartidas=0x7f050015;
         public static final int hello_world=0x7f05000c;
         public static final int incorrects=0x7f050011;
         public static final int ingresar=0x7f050005;
