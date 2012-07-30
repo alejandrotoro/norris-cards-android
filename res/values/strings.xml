@@ -23,5 +23,6 @@
     <string name="email_missmatch">Tu correo no existe, regístrate!</string>
     <string name="seleccione_partida">Seleccione una partida para iniciar el juego</string>
     <string name="error_nopartidas">No hay partidas creadas</string>
+    <string name="ingrese_crearpartida">Ingrese la info para crear partida</string>
 
 </resources>

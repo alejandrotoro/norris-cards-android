@@ -8,8 +8,7 @@
 
     <Button
         android:id="@+id/btnVolver"
-        style="@style/back_btn"
-        android:onClick="goBack" />
+        style="@style/back_btn"/>
 
     <TextView
         android:id="@+id/textView1"
