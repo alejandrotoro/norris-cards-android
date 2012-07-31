@@ -27,5 +27,6 @@
     <string name="title_activity_inicio_partida">InicioPartidaActivity</string>
     <string name="numero_jugadores">Numero de jugadores</string>
     <string name="guardar">Guardar</string>
+    <string name="espere_inicio_partida">Espere un momento mientras inicia la partida</string>
 
 </resources>
