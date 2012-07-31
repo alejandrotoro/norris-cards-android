@@ -9,6 +9,8 @@ public class Global {
 	private String userEmail;
 	private Integer userId;
 	private Integer barajaId;
+	private String barajaNombre;
+	private Integer partidaId;
 	
 	private Global(){
 		
@@ -51,6 +53,22 @@ public class Global {
 
 	public void setBarajaId(Integer barajaId) {
 		this.barajaId = barajaId;
+	}
+
+	public String getBarajaNombre() {
+		return barajaNombre;
+	}
+
+	public void setBarajaNombre(String barajaNombre) {
+		this.barajaNombre = barajaNombre;
+	}
+	
+	public Integer getPartidaId() {
+		return partidaId;
+	}
+
+	public void setPartidaId(Integer partidaId) {
+		this.partidaId = partidaId;
 	}
 	
 }

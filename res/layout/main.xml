@@ -22,13 +22,14 @@
 	        android:textSize="20dp"
 	        android:layout_marginBottom="10dp"
 	        android:textColor="#024102" />
-        
-        <EditText 
+        
+        <EditText
             android:id="@+id/email_field"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:gravity="center_horizontal"
-	        android:layout_marginBottom="10dp" />
+            android:text="qwer@qwer.qq" />
 	    
         <TextView
 	        android:layout_width="fill_parent"
@@ -38,14 +39,15 @@
 	        android:textSize="20dp"
 	        android:layout_marginBottom="10dp"
 	        android:textColor="#024102" />
-        
-        <EditText 
+        
+        <EditText
             android:id="@+id/password_field"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:gravity="center_horizontal"
-	        android:layout_marginBottom="10dp"
-	        android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:text="123456" />
         
         <Button 
             android:id="@+id/login_btn"

@@ -1,15 +1,49 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:paddingTop="10dp"
+    android:background="@drawable/login_480x640" >
 
+    <Button
+        android:id="@+id/btnVolver"
+        style="@style/back_btn" />
+    
     <TextView
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:padding="@dimen/padding_medium"
-        android:text="@string/hello_world"
-        tools:context=".CrearPartidaActivity" />
+        android:text="@string/ingrese_crearpartida" 
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="#000000"/>
+    
+    <TextView 
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/numero_jugadores" 
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="25dp"
+        android:textColor="#000000"
+        />
+    
+    <Spinner 
+        android:id="@+id/spNumeroJugadores"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        />
+    
+    <Button 
+        android:id="@+id/btnGuardar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/guardar"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        />
 
-</RelativeLayout>
+</LinearLayout>
