@@ -31,9 +31,11 @@ import android.widget.Toast;
 public class Registro extends Activity {
 
 	EditText email;
+	EditText usuario;
 	EditText password;
 	EditText v_password;
 	String email_s;
+	String usuario_s;
 	String password_s;
 	String v_password_s;
 	String url = Global.getInstance().getProduction();
@@ -47,9 +49,11 @@ public class Registro extends Activity {
 		Resources res = getResources();
 		String message;
 		email = (EditText)this.findViewById(R.id.email_field);
+		usuario = (EditText)this.findViewById(R.id.usuario_field);
 		password = (EditText)this.findViewById(R.id.password_field);
 		v_password = (EditText)this.findViewById(R.id.verify_password_field);
 		email_s = email.getText().toString().trim();
+		usuario_s = usuario.getText().toString().trim();
 		password_s = password.getText().toString().trim();
 		v_password_s = v_password.getText().toString().trim();
 		if(email_s.equals("")){
@@ -57,6 +61,9 @@ public class Registro extends Activity {
 			error(message);
 		}else if(password_s.equals("")){
 			message = res.getString(R.string.password_blank);
+			error(message);
+		}else if(usuario_s.equals("")){
+			message = res.getString(R.string.usuario_blank);
 			error(message);
 		}else if(!password_s.equals(v_password_s)){
 			message = res.getString(R.string.pass_missmatch);
@@ -67,8 +74,9 @@ public class Registro extends Activity {
 		    String auth = url+"/users.json";
 		    HttpPost httppost = new HttpPost(auth);
 		    try {
-		    	List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+		    	List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(4);
 		    	nameValuePairs.add(new BasicNameValuePair("user[email]", email_s));
+		    	nameValuePairs.add(new BasicNameValuePair("user[usuario]", usuario_s));
 		    	nameValuePairs.add(new BasicNameValuePair("user[password]", password_s));
 		    	nameValuePairs.add(new BasicNameValuePair("user[password_confirmation]", v_password_s));
 		        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));

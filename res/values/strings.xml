@@ -4,10 +4,12 @@
     <string name="app_name">Norris Cards</string>
     <string name="bienvenido">Bienvenido a Norris Cards</string>
     <string name="email">Correo electrónico:</string>
+    <string name="usuario">Nombre de usuario:</string>
     <string name="password">Contraseña:</string>
     <string name="repite_password">Repite la Contraseña:</string>
     <string name="ingresar">Ingresar</string>
     <string name="email_blank">Escribe tu correo electrónico.</string>
+    <string name="usuario_blank">Ingresa tu nombre de usuario.</string>
     <string name="password_blank">Escribe tu contraseña.</string>
     <string name="connection_error">Error de conexión, por favor inténtalo mas tarde.</string>
     <string name="crear_partida">Crear nueva partida</string>

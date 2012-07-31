@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:paddingTop="10dp"
-    android:background="@drawable/login_480x640" >
+    android:background="@drawable/registro_480x640" >
 
     <Button
         android:id="@+id/back_btn"
@@ -26,13 +26,29 @@
 	        android:text="@string/email"
 	        android:gravity="center_horizontal"
 	        android:textSize="20dp"
-	        android:layout_marginBottom="5dp"
+	        android:layout_marginBottom="3dp"
+	        android:textColor="#024102" />
+        
+        <EditText
+            android:id="@+id/email_field"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center_horizontal" />
+	    
+        <TextView
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:text="@string/usuario"
+	        android:gravity="center_horizontal"
+	        android:textSize="20dp"
+	        android:layout_marginBottom="3dp"
 	        android:textColor="#024102" />
         
         <EditText 
-            android:id="@+id/email_field"
+            android:id="@+id/usuario_field"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:gravity="center_horizontal"
 	        android:layout_marginBottom="5dp" />
 	    
@@ -42,13 +58,13 @@
 	        android:text="@string/password"
 	        android:gravity="center_horizontal"
 	        android:textSize="20dp"
-	        android:layout_marginBottom="5dp"
+	        android:layout_marginBottom="3dp"
 	        android:textColor="#024102" />
         
         <EditText 
             android:id="@+id/password_field"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:gravity="center_horizontal"
 	        android:layout_marginBottom="5dp"
 	        android:inputType="textPassword" />
@@ -59,13 +75,13 @@
 	        android:text="@string/repite_password"
 	        android:gravity="center_horizontal"
 	        android:textSize="20dp"
-	        android:layout_marginBottom="5dp"
+	        android:layout_marginBottom="3dp"
 	        android:textColor="#024102" />
         
         <EditText 
             android:id="@+id/verify_password_field"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:gravity="center_horizontal"
 	        android:layout_marginBottom="5dp"
 	        android:inputType="textPassword" />
