@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.support.v4.app.NavUtils;
 
 public class CrearPartidaActivity extends Activity {
-	private Button btnVolver;
+	private Button btnVolver; 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -1,19 +1,13 @@
 package com.norris.cards;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,13 +23,12 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.support.v4.app.NavUtils;
 
 public class BuscarPartidasActivity extends Activity {
 	private Button btnVolver;
@@ -44,7 +37,8 @@ public class BuscarPartidasActivity extends Activity {
 	private String message;
 	private Resources res;
 	private ProgressDialog pd;
-	private String[] listaPartidas;
+	private String[][] listaPartidas;
+	private int[] idsPartidas;
 	private Context context;
 
     @Override
@@ -65,6 +59,14 @@ public class BuscarPartidasActivity extends Activity {
         
         new ObtenerPartidas().execute("");
         pd = ProgressDialog.show(this, "Un momento","Consultando partidas activas",true, false);
+        
+        lvPartidas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+				Log.i("**info", "entro item " + arg2);
+				Toast.makeText(BuscarPartidasActivity.this, ""+arg2, Toast.LENGTH_SHORT).show();
+			}
+		});
         
     }
 
@@ -88,32 +90,37 @@ public class BuscarPartidasActivity extends Activity {
 			HttpClient httpclient = new DefaultHttpClient();
 		    
 		    String auth = url+"/partidas.json";
-		    //HttpPost httppost = new HttpPost(auth);
 		    HttpGet httpget = new HttpGet(auth);
 		    try {
-		        //HttpResponse response = httpclient.execute(httppost);
 		    	HttpResponse response = httpclient.execute(httpget);
 	    		int status = response.getStatusLine().getStatusCode();
 	    		
 	    		if(status == 200 || status == 201){
 	    			HttpEntity e = response.getEntity();
 	    			data = EntityUtils.toString(e);
-	    			//data = "["+data+"]";
-	    			Log.i("***info", data);
+	    			
+	    			data = data.substring(0, data.length()-2);
+	    			data += "]";
+	    			
+	    			//Log.i("***info", data);
+	    			
 	    			JSONArray a = new JSONArray(data);
 	    			if(a.length() > 0){
-		    			listaPartidas = new String[a.length()];
+		    			listaPartidas = new String[a.length()][2];
+		    			idsPartidas = new int[a.length()];
 		    			
 		    			for(int i = 0; i < a.length(); i++){
 		    				JSONObject datos = a.getJSONObject(i);
-		    				if(datos.getString("baraja_id") != null){
-		    					listaPartidas[i] = "Baraja: " + datos.getString("baraja_id");
+		    				if(datos.getString("id_partida") != null){
+		    					listaPartidas[i][0] = datos.getString("nombre_baraja");
+		    					listaPartidas[i][1] = datos.getString("usuario");
+		    					idsPartidas[i] = datos.getInt("id_partida");
+		    					
+		    					//Log.i("***inf", listaPartidas[i][0] + " " + listaPartidas[i][1]);
 		    				}
 		    			}
 	    			}else{
 	    				listaPartidas = null;
-	    				/*message = res.getString(R.string.error_nopartidas);
-	    				error(message);*/
 	    			}
 	    		}else {
 	    			HttpEntity e = response.getEntity();
@@ -139,12 +146,16 @@ public class BuscarPartidasActivity extends Activity {
 			pd.dismiss();
 			
 			if(listaPartidas == null){
-				listaPartidas = new String[1];
-				listaPartidas[0] = res.getString(R.string.error_nopartidas);
+				listaPartidas = new String[1][2];
+				listaPartidas[0][0] = res.getString(R.string.error_nopartidas);
+				listaPartidas[0][1] = "";
+				idsPartidas = new int[1];
+				idsPartidas[0] = 0;
 			}
 			
-			ArrayAdapter adapter = new ArrayAdapter(BuscarPartidasActivity.this, android.R.layout.simple_list_item_1, listaPartidas);
-			lvPartidas.setAdapter(adapter);
+			/*ArrayAdapter adapter = new ArrayAdapter(BuscarPartidasActivity.this, android.R.layout.simple_list_item_1, listaPartidas);
+			lvPartidas.setAdapter(adapter);*/
+			lvPartidas.setAdapter(new AdapterListaPartidas(BuscarPartidasActivity.this, listaPartidas));
 			
 			super.onPostExecute(result);
 		}
