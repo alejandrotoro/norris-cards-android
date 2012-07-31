@@ -7,6 +7,7 @@ public class Global {
 	private String production = "http://norris-cards.herokuapp.com";
 	private String development = "http://192.168.141.3:3000";
 	private String userEmail;
+	private String usuario;
 	private Integer userId;
 	private Integer barajaId;
 	private String barajaNombre;
@@ -37,6 +38,14 @@ public class Global {
 
 	public void setUserEmail(String email) {
 		this.userEmail = email;
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String user) {
+		this.usuario = user;
 	}
 
 	public Integer getUserId() {
