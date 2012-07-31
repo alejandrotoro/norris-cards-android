@@ -18,5 +18,32 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="5dp"
         android:textColor="#000000"/>
+    
+    <TextView 
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/numero_jugadores" 
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="25dp"
+        android:textColor="#000000"
+        />
+    
+    <Spinner 
+        android:id="@+id/spNumeroJugadores"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        />
+    
+    <Button 
+        android:id="@+id/btnGuardar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/guardar"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        />
 
 </LinearLayout>

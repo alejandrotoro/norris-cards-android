@@ -41,13 +41,6 @@ public class AdapterListaPartidas extends BaseAdapter {
 		TextView tvBaraja = (TextView)convertView.findViewById(R.id.tvBaraja);
 		TextView tvCreador = (TextView)convertView.findViewById(R.id.tvCreador);
 		ImageView btnIr = (ImageView)convertView.findViewById(R.drawable.back_btn);
-		btnIr.setId(1);
-		
-		btnIr.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				Toast.makeText(c, ""+v.getId(), Toast.LENGTH_LONG).show();
-			}
-		});
 		
 		tvBaraja.setText(datos[position][0]);
 		tvCreador.setText(datos[position][1]);

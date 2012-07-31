@@ -63,8 +63,9 @@ public class BuscarPartidasActivity extends Activity {
         lvPartidas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-				Log.i("**info", "entro item " + arg2);
-				Toast.makeText(BuscarPartidasActivity.this, ""+arg2, Toast.LENGTH_SHORT).show();
+				//Log.i("**info", "entro item " + arg2);
+				
+				//asociar usuario a partida 
 			}
 		});
         
@@ -99,10 +100,9 @@ public class BuscarPartidasActivity extends Activity {
 	    			HttpEntity e = response.getEntity();
 	    			data = EntityUtils.toString(e);
 	    			
+	    			//se borra come final que devuelve el servicio
 	    			data = data.substring(0, data.length()-2);
 	    			data += "]";
-	    			
-	    			//Log.i("***info", data);
 	    			
 	    			JSONArray a = new JSONArray(data);
 	    			if(a.length() > 0){
@@ -115,8 +115,6 @@ public class BuscarPartidasActivity extends Activity {
 		    					listaPartidas[i][0] = datos.getString("nombre_baraja");
 		    					listaPartidas[i][1] = datos.getString("usuario");
 		    					idsPartidas[i] = datos.getInt("id_partida");
-		    					
-		    					//Log.i("***inf", listaPartidas[i][0] + " " + listaPartidas[i][1]);
 		    				}
 		    			}
 	    			}else{

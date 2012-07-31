@@ -19,6 +19,7 @@ public class Dashboard extends Activity {
         
         //seteo ID de baraja para simular pues esto debe venir al seleccionar baraja
         Global.getInstance().setBarajaId(1);
+        Global.getInstance().setBarajaNombre("Nombre seteado de baraja");
         
         btnCrearPartida = (Button)this.findViewById(R.id.btnCrearPartida);
         btnBuscarPartidas = (Button)this.findViewById(R.id.btnBuscarPartidas);
