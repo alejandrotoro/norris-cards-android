@@ -1,6 +1,8 @@
 package com.norris.cards;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import org.apache.http.HttpEntity;
@@ -17,6 +19,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Paint.Join;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
@@ -139,7 +142,7 @@ public class VerBarajaActivity extends Activity {
      */
     private void obtenerBarajas()
     {
-    	
+    	res = getResources();
 		HttpClient httpclient = new DefaultHttpClient();
 	    
 	    //String auth = url+"/barajas.json";
@@ -152,10 +155,21 @@ public class VerBarajaActivity extends Activity {
     			HttpEntity e = response.getEntity();
     			String data = EntityUtils.toString(e);
     			//data = "["+data+"]";
-    			JSONArray a = new JSONArray(data);
-    			JSONObject datos1 = a.getJSONObject(0);
-    			Log.e("TATAG", datos1.getString("nombre"));
-    			//Toast.makeText(this, "ee"+datos.getInt("id"), Toast.LENGTH_SHORT).show();
+    			JSONArray jarray = new JSONArray(data);
+    			JSONObject jdata = null;
+                
+    			int id;
+    			String nombre;
+    			String url_icono;
+    			ArrayList arreglo;
+    			//Se recorre el vector json con los datos
+                for(int i = 0; i < jarray.length(); i++){
+                	jdata = jarray.getJSONObject(i);
+                	id = jdata.getInt("id");
+                	nombre = jdata.getString("nombre");
+                	url_icono = jdata.getString("url_icono");	
+                }
+                
     			//Toast.makeText(this, data, Toast.LENGTH_SHORT).show();
     			/*Global.getInstance().setUserId(datos.getInt("id"));
     			login();*/
@@ -165,19 +179,14 @@ public class VerBarajaActivity extends Activity {
 				error("eee");
     		}
 	    } catch (ClientProtocolException e) {
-			//message = res.getString(R.string.connection_error);
-	    	message="puta vidddda";
+			message = res.getString(R.string.connection_error);
 			error(message);
 	    } catch (IOException e) {
-			//message = res.getString(R.string.connection_error);
-	    	message="puta";
-	    	Toast.makeText(this, ""+e, Toast.LENGTH_LONG).show();
+			message = res.getString(R.string.connection_error);
 			error(message);
 	    } catch (JSONException e) {
-	    	//message = res.getString(R.string.connection_error);
-	    	message="puta vida ooo";
+	    	message = res.getString(R.string.connection_error);
 	    	error(message);
-	    	//Toast.makeText(this, message, Toast.LENGTH_LONG).show();
 		}
 		
 		//return null;

@@ -40,5 +40,13 @@ public class Dashboard extends Activity {
 				startActivity(intent);
 			}
 		});
+        
+        //accion para boton Buscar partidas activas
+        btnVerBarajas.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				Intent intent = new Intent(Dashboard.this, VerBarajaActivity.class);
+				startActivity(intent);
+			}
+		});
     }
 }
