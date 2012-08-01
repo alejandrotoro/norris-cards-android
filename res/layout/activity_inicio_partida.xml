@@ -5,26 +5,14 @@
     android:orientation="vertical"
     android:paddingTop="10dp"
     android:background="@drawable/login_480x640" >
-
-    <Button
-        android:id="@+id/btnVolver"
-        style="@style/back_btn"/>
-
+    
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/seleccione_partida" 
-        android:layout_marginTop="10dp"
+        android:text="@string/espere_inicio_partida" 
+        android:layout_marginTop="50dp"
         android:layout_marginLeft="5dp"
         android:textColor="#000000"/>
 
-    <ListView
-        android:id="@+id/lvPartidas"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp" 
-        android:paddingLeft="10dp">
-    </ListView>
-    
 </LinearLayout>

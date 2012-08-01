@@ -1,35 +1,31 @@
 package com.norris.cards;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.LinkedList;
-import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,14 +33,21 @@ public class VerBarajaActivity extends Activity {
 	
 	public LinkedList<String[][]> lstbarajas;//Se define la lista de barajas
 	public String url = Global.getInstance().getProduction();
+	String data = "";
+	private String[][] listaBarajas;
+	private int[] idsBarajas;
+	private String message;
+	private Resources res;
+	
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_baraja);
         
-		ListView l = (ListView) findViewById(R.id.ListView01);
-		l.setAdapter(new miAdapter(this));
+        obtenerBarajas();//Se obtienen las barajas
+		//ListView l = (ListView) findViewById(R.id.ListView01);
+		//l.setAdapter(new miAdapter(this));
     }
 
     @Override
@@ -59,8 +62,8 @@ public class VerBarajaActivity extends Activity {
 		private ImageManager imageManager;
 		private Context actividad;
  
-		private static final String[][] data = {{"Carros","1","http://colombia.golgolgol.net/images_repository/0/9404_escudo.png_fd919ee6196ded3f4983b4ee2fa91bb4.png"}, 
-												   {"Chicas exÃ³ticas","2","http://i.imgur.com/LHJiA.jpg"}, 
+		private static final String[][] datos = {{"Carros","1","http://colombia.golgolgol.net/images_repository/0/9404_escudo.png_fd919ee6196ded3f4983b4ee2fa91bb4.png"}, 
+												   {"Chicas exoticas","2","http://i.imgur.com/LHJiA.jpg"}, 
 												   {"Choferes","3","http://i.imgur.com/VsVMQ.jpg"}, 
 												   {"Futbolistas","4","http://colombia.golgolgol.net/images_repository/0/9404_escudo.png_fd919ee6196ded3f4983b4ee2fa91bb4.png"}, 
 												   {"Presentadoras","5","http://i.imgur.com/LHJiA.jpg"}, 
@@ -92,12 +95,12 @@ public class VerBarajaActivity extends Activity {
 			imgBaraja = (ImageView) convertView.findViewById(R.id.imgbajara);
 			imgNext = (ImageView) convertView.findViewById(R.id.imgnext);
  
-			text.setText(data[position][0]);
+			text.setText(datos[position][0]);
 			
 			//Se muestra la imagen de la bajara que se trae desde el servidor
-	        imageManager.fetchDrawableOnThread(data[position][2], imgBaraja);
+	        imageManager.fetchDrawableOnThread(datos[position][2], imgBaraja);
  
-	        imgNext.setId(Integer.parseInt(data[position][1]));
+	        imgNext.setId(Integer.parseInt(datos[position][1]));
 	        imgNext.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
@@ -111,7 +114,7 @@ public class VerBarajaActivity extends Activity {
  
 		public int getCount() {
  
-			return data.length;
+			return datos.length;
  
 		}
  
@@ -134,72 +137,55 @@ public class VerBarajaActivity extends Activity {
      * Método para obtener las barajas desde el servidor y meterlas en un array
      * 
      */
-    private void obtenerBarajas(){
-        List valores = new ArrayList();
-        InputStream is = null;
-        /*
-        try{
-            HttpClient httpclient = new DefaultHttpClient();
-            HttpGet httpget = new HttpGet(url+"/barajas.json");
-            
-            //recibe la respuesta del servidor
-            HttpEntity entity = response.getEntity();
-            is = entity.getContent();
-            
-            BufferedReader reader =  new BufferedReader(new InputStreamReader(is, "iso-8859-1"), 8);
-            StringBuilder sb = new StringBuilder();
-            sb.append(reader.readLine() + "\n");
-            
-            String line = "0";
-            while((line = reader.readLine()) != null){
-                sb.append(line + "\n");
-            }
-            
-            is.close();
-            result = sb.toString();
-            
-            int prestamoId;
-            String clienteNombre;
-            String clienteTelefono;
-            String fecha;
-            int cuotas;
-            int diaCobro;
-            String fechaCobro;
-            Double monto;
-            Double saldo;
-            Double valorCuota;
-
-            
-            JSONArray jArray = new JSONArray(result);
-            JSONObject json_data = null;
-            
-            //Se recorre el vector json con los datos
-            for(int i = 0; i < jArray.length(); i++){
-             json_data = jArray.getJSONObject(i);
-                prestamoId = json_data.getInt("idprestamo");
-                clienteNombre = json_data.getString("nombre");
-                clienteTelefono = json_data.getString("telefono");
-                fecha = json_data.getString("fecha");
-                cuotas = json_data.getInt("cuotas");
-                diaCobro = json_data.getInt("diacobro");
-                fechaCobro = json_data.getString("fechacobro");
-                monto = json_data.getDouble("monto");
-                saldo = json_data.getDouble("saldo");
-                valorCuota = json_data.getDouble("valorcuota");
-                //Se pobla el vector de prestamos
-                lstprestamos.add(new Prestamo(prestamoId, clienteNombre,clienteTelefono,fecha,cuotas,diaCobro,fechaCobro,monto,saldo,valorCuota));
-            }
-            
-            //Creamos el adaptador
-            ArrayAdapter<Prestamo> spinner_adaptere = new ArrayAdapter<Prestamo>(AListaPrestamos.this, android.R.layout.simple_spinner_item, lstprestamos);
-            //Añadimos el layout para el menú y se lo damos al spinner
-            spinner_adaptere.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spPPrestamos.setAdapter(spinner_adaptere);
-            //spPPrestamos.setAdapter(spinner_adaptere);
-      
-        }catch(Exception e){
-            Log.e("**ERROR", "Error conexion " + e.toString());
-            Toast.makeText(getBaseContext(), e.toString(), Toast.LENGTH_LONG).show();
-        }*/
+    private void obtenerBarajas()
+    {
+    	
+		HttpClient httpclient = new DefaultHttpClient();
+	    
+	    //String auth = url+"/barajas.json";
+	    String auth = "http://norris-cards.herokuapp.com/barajas.json";
+	    HttpGet httpget = new HttpGet(auth);
+	    try {
+	    	HttpResponse response = httpclient.execute(httpget);
+    		int status = response.getStatusLine().getStatusCode();   		
+    		if(status == 200 || status == 201){
+    			HttpEntity e = response.getEntity();
+    			String data = EntityUtils.toString(e);
+    			//data = "["+data+"]";
+    			JSONArray a = new JSONArray(data);
+    			JSONObject datos1 = a.getJSONObject(0);
+    			Log.e("TATAG", datos1.getString("nombre"));
+    			//Toast.makeText(this, "ee"+datos.getInt("id"), Toast.LENGTH_SHORT).show();
+    			//Toast.makeText(this, data, Toast.LENGTH_SHORT).show();
+    			/*Global.getInstance().setUserId(datos.getInt("id"));
+    			login();*/
+    		}else {
+    			HttpEntity e = response.getEntity();
+    			String data = EntityUtils.toString(e);
+				error("eee");
+    		}
+	    } catch (ClientProtocolException e) {
+			//message = res.getString(R.string.connection_error);
+	    	message="puta vidddda";
+			error(message);
+	    } catch (IOException e) {
+			//message = res.getString(R.string.connection_error);
+	    	message="puta";
+	    	Toast.makeText(this, ""+e, Toast.LENGTH_LONG).show();
+			error(message);
+	    } catch (JSONException e) {
+	    	//message = res.getString(R.string.connection_error);
+	    	message="puta vida ooo";
+	    	error(message);
+	    	//Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+		}
+		
+		//return null;
     }
+    
+    public void error(String error){
+		Vibrator vibrar = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+		vibrar.vibrate(800);
+		Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+	}
 }
