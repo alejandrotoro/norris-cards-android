@@ -24,6 +24,12 @@
         <activity android:name=".Dashboard" >
         </activity>
         <activity
+            android:name=".ForgotPassword" >
+        </activity>
+        <activity
+            android:name=".ResetPassword" >
+        </activity>
+        <activity
             android:name=".CrearPartidaActivity"
             android:label="@string/title_activity_crear_partida" >
             <intent-filter>
@@ -51,6 +57,15 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".VerBarajaActivity"
+            android:label="@string/title_activity_ver_baraja" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".InicioPartidaActivity"
             android:label="@string/title_activity_inicio_partida" >
             <intent-filter>
@@ -60,5 +75,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>
