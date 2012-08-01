@@ -30,4 +30,7 @@
     <string name="numero_jugadores">Numero de jugadores</string>
     <string name="guardar">Guardar</string>
     <string name="espere_inicio_partida">Espere un momento mientras inicia la partida</string>
+    <string name="forgot_pass">¿Olvidaste tu contraseña?</string>
+    <string name="enviar">Enviar</string>
+    <string name="reset_pass">Escribe y verifica tu nueva contraseña</string>
 </resources>

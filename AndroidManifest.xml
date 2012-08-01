@@ -24,6 +24,12 @@
         <activity android:name=".Dashboard" >
         </activity>
         <activity
+            android:name=".ForgotPassword" >
+        </activity>
+        <activity
+            android:name=".ResetPassword" >
+        </activity>
+        <activity
             android:name=".CrearPartidaActivity"
             android:label="@string/title_activity_crear_partida" >
             <intent-filter>

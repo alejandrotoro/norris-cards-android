@@ -6,13 +6,15 @@
     android:gravity="center"
     android:paddingTop="15dp"
     android:background="@drawable/login_480x640" >
-    
-    <LinearLayout 
-	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-	    android:orientation="vertical"
-	    android:gravity="center"
-	    android:padding="20dp" >
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="391dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="50dp" >
 	    
         <TextView
 	        android:layout_width="fill_parent"
@@ -28,8 +30,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:gravity="center_horizontal"
-            android:text="qwer@qwer.qq" />
+            android:gravity="center_horizontal" />
 	    
         <TextView
 	        android:layout_width="fill_parent"
@@ -46,8 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:gravity="center_horizontal"
-            android:inputType="textPassword"
-            android:text="123456" />
+            android:inputType="textPassword" />
         
         <Button 
             android:id="@+id/login_btn"
@@ -68,5 +68,17 @@
             android:textSize="20dp" />
         
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autoLink="web"
+        android:clickable="true"
+        android:onClick="forgotPass"
+        android:text="@string/forgot_pass"
+        android:textColor="#E46526"
+        android:paddingBottom="25dp"
+        android:layout_gravity="left"
+        android:paddingLeft="20dp" />
 
 </LinearLayout>

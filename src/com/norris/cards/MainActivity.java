@@ -70,9 +70,7 @@ public class MainActivity extends Activity {
 	    		if(status == 200 || status == 201){
 	    			HttpEntity e = response.getEntity();
 	    			String data = EntityUtils.toString(e);
-	    			data = "["+data+"]";
-	    			JSONArray a = new JSONArray(data);
-	    			JSONObject datos = a.getJSONObject(0);
+	    			JSONObject datos = new JSONObject(data);
 	    			Global.getInstance().setUserId(datos.getInt("id"));
 	    			login();
 	    		}else {
@@ -104,6 +102,11 @@ public class MainActivity extends Activity {
 	
 	public void registro(View view){
 		Intent intent = new Intent(MainActivity.this, Registro.class);
+		startActivity(intent);
+	}
+	
+	public void forgotPass(View view){
+		Intent intent = new Intent(MainActivity.this, ForgotPassword.class);
 		startActivity(intent);
 	}
 	
