@@ -79,5 +79,4 @@ public class Global {
 	public void setPartidaId(Integer partidaId) {
 		this.partidaId = partidaId;
 	}
-	
 }

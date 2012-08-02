@@ -218,7 +218,5 @@ public class BuscarPartidasActivity extends Activity {
 			super.onPostExecute(result);
 		}
 		    	
-    }
-
-    
+    }   
 }

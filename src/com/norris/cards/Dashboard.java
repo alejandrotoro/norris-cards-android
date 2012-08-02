@@ -44,5 +44,13 @@ public class Dashboard extends Activity {
 				startActivity(intent);
 			}
 		});
+		   
+		//Ver barajas
+        btnVerBarajas.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				Intent intent = new Intent(Dashboard.this, VerBarajaActivity.class);
+				startActivity(intent);
+			}
+		});
     }
 }
