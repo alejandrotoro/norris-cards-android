@@ -17,6 +17,7 @@ public class InicioPartidaActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_inicio_partida, menu);
+        //blah
         return true;
     }
 
