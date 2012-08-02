@@ -71,6 +71,7 @@ public class CrearPartidaActivity extends Activity {
 			    
 			    String auth = url+"/partidas.json";
 			    HttpPost httppost = new HttpPost(auth);
+			    
 			    try {
 			    	List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
 			    	nameValuePairs.add(new BasicNameValuePair("partida[baraja_id]", baraja));
