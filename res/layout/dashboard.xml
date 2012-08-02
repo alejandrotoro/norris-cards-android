@@ -11,7 +11,7 @@
 	    android:orientation="vertical"
 	    android:gravity="top"
 	    android:padding="10dp" >
-        
+        
         <Button
             android:id="@+id/btnCrearPartida"
             android:layout_width="fill_parent"
@@ -20,7 +20,7 @@
             android:gravity="center"
             android:text="@string/crear_partida"
             android:textSize="20dp" />
-        
+        
         <Button
             android:id="@+id/btnBuscarPartidas"
             android:layout_width="fill_parent"
@@ -29,7 +29,7 @@
             android:gravity="center"
             android:text="@string/buscar_partida"
             android:textSize="20dp" />
-        
+        
         <Button
             android:id="@+id/btnVerBarajas"
             android:layout_width="fill_parent"
