@@ -3,15 +3,23 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:gravity="center" >
+    android:paddingTop="10dp"
+    android:background="@drawable/registro_480x640" >
+
+    <Button
+        android:id="@+id/back_btn"
+        android:onClick="goBack"
+        style="@style/back_btn" />
     
     <LinearLayout 
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
 	    android:orientation="vertical"
 	    android:gravity="top"
-	    android:padding="10dp" >
-        
+	    android:paddingLeft="10dp"
+	    android:paddingRight="10dp"
+	    android:paddingTop="40dp" >
+        
         <Button
             android:id="@+id/btnCrearPartida"
             android:layout_width="fill_parent"
@@ -20,7 +28,7 @@
             android:gravity="center"
             android:text="@string/crear_partida"
             android:textSize="20dp" />
-        
+        
         <Button
             android:id="@+id/btnBuscarPartidas"
             android:layout_width="fill_parent"
@@ -29,7 +37,7 @@
             android:gravity="center"
             android:text="@string/buscar_partida"
             android:textSize="20dp" />
-        
+        
         <Button
             android:id="@+id/btnVerBarajas"
             android:layout_width="fill_parent"

@@ -5,7 +5,7 @@ import com.norris.cards.Global;
 public class Global {
 	static private Global instance = null;
 	private String production = "http://norris-cards.herokuapp.com";
-	private String development = "http://192.168.141.3:3000";
+	private String development = "http://192.168.0.10:3000";
 	private String userEmail;
 	private String usuario;
 	private Integer userId;
@@ -79,5 +79,4 @@ public class Global {
 	public void setPartidaId(Integer partidaId) {
 		this.partidaId = partidaId;
 	}
-	
 }

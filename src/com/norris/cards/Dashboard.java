@@ -10,7 +10,11 @@ public class Dashboard extends Activity {
 	private Button btnCrearPartida;
 	private Button btnBuscarPartidas;
 	private Button btnVerBarajas;
-
+	
+	public void goBack(View view){
+		Intent intent = new Intent(Dashboard.this, MainActivity.class);
+		startActivity(intent);
+	}
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,8 +44,8 @@ public class Dashboard extends Activity {
 				startActivity(intent);
 			}
 		});
-        
-        //accion para boton Buscar partidas activas
+		   
+		//Ver barajas
         btnVerBarajas.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				Intent intent = new Intent(Dashboard.this, VerBarajaActivity.class);

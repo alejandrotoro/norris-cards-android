@@ -14,7 +14,6 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,44 +23,40 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class MainActivity extends Activity {
+public class ForgotPassword extends Activity {
 	
 	EditText email;
-	EditText password;
 	String email_s;
-	String password_s;
 	String url = Global.getInstance().getProduction();
+	
+	public void goBack(View view){
+		Intent intent = new Intent(ForgotPassword.this, MainActivity.class);
+		startActivity(intent);
+	}
 	
 	public void validate(View view) throws JSONException{
 		Resources res = getResources();
 		String message;
 		email = (EditText)this.findViewById(R.id.email_field);
-		password = (EditText)this.findViewById(R.id.password_field);
 		email_s = email.getText().toString().trim();
-		password_s = password.getText().toString().trim();
 		
 		Global.getInstance().setUserEmail(email_s);
 		
 		if(email_s.equals("")){
 			message = res.getString(R.string.email_blank);
 			error(message);
-		}else if(password_s.equals("")){
-			message = res.getString(R.string.password_blank);
-			error(message);
 		}else{
 		    HttpClient httpclient = new DefaultHttpClient();
 		    
-		    String auth = url+"/users/sign_in.json";
+		    String auth = url+"/verify_email.json";
 		    HttpPost httppost = new HttpPost(auth);
 		    try {
-		    	List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+		    	List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
 		    	nameValuePairs.add(new BasicNameValuePair("user[email]", email_s));
-		    	nameValuePairs.add(new BasicNameValuePair("user[password]", password_s));
 		        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 	
 		        HttpResponse response = httpclient.execute(httppost);
@@ -71,8 +66,12 @@ public class MainActivity extends Activity {
 	    			HttpEntity e = response.getEntity();
 	    			String data = EntityUtils.toString(e);
 	    			JSONObject datos = new JSONObject(data);
-	    			Global.getInstance().setUserId(datos.getInt("id"));
-	    			login();
+	    			if(datos.getInt("id") != 0){
+	    				Global.getInstance().setUserId(datos.getInt("id"));
+		    			reset_pass();
+	    			}else{
+	    				error("Correo no encontrado.");
+	    			}
 	    		}else {
 	    			HttpEntity e = response.getEntity();
 	    			String data = EntityUtils.toString(e);
@@ -89,8 +88,8 @@ public class MainActivity extends Activity {
 		}
 	}
 	
-	public void login() throws JSONException{
-		Intent intent = new Intent(MainActivity.this, Dashboard.class);
+	public void reset_pass() throws JSONException{
+		Intent intent = new Intent(ForgotPassword.this, ResetPassword.class);
 		startActivity(intent);
 	}
 	
@@ -100,20 +99,11 @@ public class MainActivity extends Activity {
 		Toast.makeText(this, error, Toast.LENGTH_LONG).show();
 	}
 	
-	public void registro(View view){
-		Intent intent = new Intent(MainActivity.this, Registro.class);
-		startActivity(intent);
-	}
-	
-	public void forgotPass(View view){
-		Intent intent = new Intent(MainActivity.this, ForgotPassword.class);
-		startActivity(intent);
-	}
-	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.forgot_password);
     }
+
 }
