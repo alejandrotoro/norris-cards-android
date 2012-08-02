@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    
     <style name="back_btn">
         <item name="android:layout_width">36dp</item>
         <item name="android:layout_height">36dp</item>
         <item name="android:background">@drawable/efecto</item>
+        <item name="android:layout_marginLeft">10dp</item>
+    </style>
+    
+    <style name="settings_btn">
+        <item name="android:layout_width">36dp</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:background">@drawable/config</item>
         <item name="android:layout_marginLeft">10dp</item>
     </style>
         

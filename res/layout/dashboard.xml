@@ -3,14 +3,22 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:gravity="center" >
+    android:paddingTop="10dp"
+    android:background="@drawable/registro_480x640" >
+
+    <Button
+        android:id="@+id/back_btn"
+        android:onClick="goBack"
+        style="@style/back_btn" />
     
     <LinearLayout 
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
 	    android:orientation="vertical"
 	    android:gravity="top"
-	    android:padding="10dp" >
+	    android:paddingLeft="10dp"
+	    android:paddingRight="10dp"
+	    android:paddingTop="40dp" >
         
         <Button
             android:id="@+id/btnCrearPartida"

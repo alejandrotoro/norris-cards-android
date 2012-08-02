@@ -10,7 +10,11 @@ public class Dashboard extends Activity {
 	private Button btnCrearPartida;
 	private Button btnBuscarPartidas;
 	private Button btnVerBarajas;
-
+	
+	public void goBack(View view){
+		Intent intent = new Intent(Dashboard.this, MainActivity.class);
+		startActivity(intent);
+	}
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
