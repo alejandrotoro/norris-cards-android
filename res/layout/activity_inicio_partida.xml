@@ -14,5 +14,13 @@
         android:layout_marginTop="50dp"
         android:layout_marginLeft="5dp"
         android:textColor="#000000"/>
+    
+    <Button 
+        android:id="@+id/iniciar_partida"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/iniciar"
+        android:onClick="iniciar"/>
 
 </LinearLayout>

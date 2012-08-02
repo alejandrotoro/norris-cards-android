@@ -1,6 +1,7 @@
 package com.norris.cards;
 
 import com.norris.cards.Global;
+import com.norris.cards.modelo.Carta;
 
 public class Global {
 	static private Global instance = null;
@@ -12,6 +13,8 @@ public class Global {
 	private Integer barajaId;
 	private String barajaNombre;
 	private Integer partidaId;
+	private String messages = "";
+	private Carta carta = null;
 	
 	private Global(){
 		
@@ -78,6 +81,22 @@ public class Global {
 
 	public void setPartidaId(Integer partidaId) {
 		this.partidaId = partidaId;
+	}
+
+	public String getMessages() {
+		return messages;
+	}
+
+	public void setMessages(String messages) {
+		this.messages = messages;
+	}
+
+	public Carta getCarta() {
+		return carta;
+	}
+
+	public void setCarta(Carta carta) {
+		this.carta = carta;
 	}
 	
 }
