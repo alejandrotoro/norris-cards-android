@@ -1,13 +1,19 @@
 package com.norris.cards;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,6 +52,7 @@ public class BuscarPartidasActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buscar_partidas);
         res = getResources();
+        this.context = this;
         
         lvPartidas = (ListView)this.findViewById(R.id.lvPartidas);
         btnVolver = (Button)this.findViewById(R.id.btnVolver);
@@ -63,9 +70,62 @@ public class BuscarPartidasActivity extends Activity {
         lvPartidas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-				//Log.i("**info", "entro item " + arg2);
+				//Log.i("**info", "entro item " + arg2 + " id " + idsPartidas[arg2]);
 				
 				//asociar usuario a partida 
+				HttpClient httpclient = new DefaultHttpClient();
+			    
+			    String auth = url+"/usuario_partidas.json";
+			    HttpPost httppost = new HttpPost(auth);
+			    try {
+			    	List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+			    	nameValuePairs.add(new BasicNameValuePair("usuario_partida[partida_id]", ""+idsPartidas[arg2]));
+			    	nameValuePairs.add(new BasicNameValuePair("usuario_partida[usuario_id]", ""+Global.getInstance().getUserId()));
+			        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+		
+			        HttpResponse response = httpclient.execute(httppost);
+		    		int status = response.getStatusLine().getStatusCode();
+		
+		    		if(status == 200 || status == 201){
+		    			HttpEntity e = response.getEntity();
+		    			String data = EntityUtils.toString(e);
+		    			data = "["+data+"]";
+		    			
+		    			Log.i("***info", data);
+		    			
+		    			JSONArray a = new JSONArray(data);
+		    			JSONObject datos = a.getJSONObject(0);
+		    			
+		    			int idusupart = datos.getInt("id");
+		    			
+		    			if(idusupart == 0){
+		    				message = res.getString(R.string.agregarpartida_error);
+		    				error(message);
+		    			}else{
+		    				Global.getInstance().setPartidaId(idusupart);
+			    			Intent intent = new Intent(BuscarPartidasActivity.this, InicioPartidaActivity.class);
+			    			startActivity(intent);
+		    			}
+		    		}else {
+		    			HttpEntity e = response.getEntity();
+		    			String data = EntityUtils.toString(e);
+						error(data);
+		    		}
+			        
+			    } catch (ClientProtocolException e) {
+					message = res.getString(R.string.connection_error);
+					error(message);
+			    } catch (IOException e) {
+					message = res.getString(R.string.connection_error);
+					error(message);
+			    } catch (JSONException e) {
+			    	message = res.getString(R.string.connection_error);
+					error(message);
+				}/*catch (Exception e) {
+			    	message = res.getString(R.string.connection_error);
+					error(message);
+				}*/
+				
 			}
 		});
         
@@ -112,7 +172,7 @@ public class BuscarPartidasActivity extends Activity {
 		    			for(int i = 0; i < a.length(); i++){
 		    				JSONObject datos = a.getJSONObject(i);
 		    				if(datos.getString("id_partida") != null){
-		    					listaPartidas[i][0] = datos.getString("nombre_baraja");
+		    					listaPartidas[i][0] = datos.getString("nombre_baraja") + " - " + datos.getInt("usuarios") + "/" + datos.getInt("cantidad_jugadores");
 		    					listaPartidas[i][1] = datos.getString("usuario");
 		    					idsPartidas[i] = datos.getInt("id_partida");
 		    				}
