@@ -26,6 +26,6 @@
     android:layout_height="wrap_content"
     android:layout_alignParentRight="true"
     android:layout_centerInParent="true"
-    android:src="@drawable/next" />
+    android:src="@drawable/ir_btn" />
     
 </RelativeLayout>

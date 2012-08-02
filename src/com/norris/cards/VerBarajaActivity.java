@@ -1,8 +1,6 @@
 package com.norris.cards;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 import org.apache.http.HttpEntity;
@@ -18,17 +16,17 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Paint.Join;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +36,7 @@ public class VerBarajaActivity extends Activity {
 	public String url = Global.getInstance().getProduction();
 	String data = "";
 	private String[][] listaBarajas;
-	private int[] idsBarajas;
+	//private int[] idsBarajas;
 	private String message;
 	private Resources res;
 	
@@ -49,8 +47,8 @@ public class VerBarajaActivity extends Activity {
         setContentView(R.layout.activity_ver_baraja);
         
         obtenerBarajas();//Se obtienen las barajas
-		//ListView l = (ListView) findViewById(R.id.ListView01);
-		//l.setAdapter(new miAdapter(this));
+		ListView l = (ListView) findViewById(R.id.ListView01);
+		l.setAdapter(new miAdapter(this,listaBarajas));
     }
 
     @Override
@@ -58,13 +56,20 @@ public class VerBarajaActivity extends Activity {
         getMenuInflater().inflate(R.menu.activity_ver_baraja, menu);
         return true;
     }
+
+    public void goBack(View view){
+		Intent intent = new Intent(VerBarajaActivity.this, Dashboard.class);
+		startActivity(intent);
+	}
     
     private static class miAdapter extends BaseAdapter {
     	 
 		private LayoutInflater mInflater;
 		private ImageManager imageManager;
 		private Context actividad;
+		private String[][] datos;
  
+		/*
 		private static final String[][] datos = {{"Carros","1","http://colombia.golgolgol.net/images_repository/0/9404_escudo.png_fd919ee6196ded3f4983b4ee2fa91bb4.png"}, 
 												   {"Chicas exoticas","2","http://i.imgur.com/LHJiA.jpg"}, 
 												   {"Choferes","3","http://i.imgur.com/VsVMQ.jpg"}, 
@@ -72,14 +77,14 @@ public class VerBarajaActivity extends Activity {
 												   {"Presentadoras","5","http://i.imgur.com/LHJiA.jpg"}, 
 												   {"Sexo","5","http://i.imgur.com/VsVMQ.jpg"}, 
 												   {"Amor","5","http://i.imgur.com/LHJiA.jpg"}, 
-												   {"Tecnología","5","http://i.imgur.com/VsVMQ.jpg"}};
+												   {"Tecnología","5","http://i.imgur.com/VsVMQ.jpg"}}*/
  
-		public miAdapter(Context context) {
+		public miAdapter(Context context, String[][] datos) {
  
 			mInflater = LayoutInflater.from(context);
 		    imageManager = new ImageManager(context);
 		    actividad = context;
- 
+		    this.datos = datos;
 		}
  
 		public View getView(int position, View convertView, ViewGroup parent) {
@@ -98,12 +103,12 @@ public class VerBarajaActivity extends Activity {
 			imgBaraja = (ImageView) convertView.findViewById(R.id.imgbajara);
 			imgNext = (ImageView) convertView.findViewById(R.id.imgnext);
  
-			text.setText(datos[position][0]);
+			text.setText(datos[position][1]);
 			
 			//Se muestra la imagen de la bajara que se trae desde el servidor
 	        imageManager.fetchDrawableOnThread(datos[position][2], imgBaraja);
  
-	        imgNext.setId(Integer.parseInt(datos[position][1]));
+	        imgNext.setId(Integer.parseInt(datos[position][0]));
 	        imgNext.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
@@ -145,8 +150,7 @@ public class VerBarajaActivity extends Activity {
     	res = getResources();
 		HttpClient httpclient = new DefaultHttpClient();
 	    
-	    //String auth = url+"/barajas.json";
-	    String auth = "http://norris-cards.herokuapp.com/barajas.json";
+	    String auth = url+"/barajas.json";
 	    HttpGet httpget = new HttpGet(auth);
 	    try {
 	    	HttpResponse response = httpclient.execute(httpget);
@@ -161,13 +165,17 @@ public class VerBarajaActivity extends Activity {
     			int id;
     			String nombre;
     			String url_icono;
-    			ArrayList arreglo;
+    			
+    			listaBarajas = new String[jarray.length()][3];
     			//Se recorre el vector json con los datos
                 for(int i = 0; i < jarray.length(); i++){
                 	jdata = jarray.getJSONObject(i);
                 	id = jdata.getInt("id");
                 	nombre = jdata.getString("nombre");
                 	url_icono = jdata.getString("url_icono");	
+                	listaBarajas[i][0] = ""+id;
+                	listaBarajas[i][1] = nombre;
+                	listaBarajas[i][2] = url_icono;
                 }
                 
     			//Toast.makeText(this, data, Toast.LENGTH_SHORT).show();
@@ -176,7 +184,6 @@ public class VerBarajaActivity extends Activity {
     		}else {
     			HttpEntity e = response.getEntity();
     			String data = EntityUtils.toString(e);
-				error("eee");
     		}
 	    } catch (ClientProtocolException e) {
 			message = res.getString(R.string.connection_error);
@@ -188,8 +195,6 @@ public class VerBarajaActivity extends Activity {
 	    	message = res.getString(R.string.connection_error);
 	    	error(message);
 		}
-		
-		//return null;
     }
     
     public void error(String error){
