@@ -30,49 +30,22 @@
             android:name=".ResetPassword" >
         </activity>
         <activity
-            android:name=".CrearPartidaActivity"
-            android:label="@string/title_activity_crear_partida" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:name=".CrearPartidaActivity" >
         </activity>
         <activity
-            android:name=".BuscarPartidasActivity"
-            android:label="@string/title_activity_buscar_partidas" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:name=".BuscarPartidasActivity" >
         </activity>
         <activity
-            android:name=".Registro"
-            android:label="@string/registro" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:name=".Registro" >
         </activity>
         <activity
-            android:name=".VerBarajaActivity"
-            android:label="@string/title_activity_ver_baraja" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:name=".VerBarajaActivity" >
         </activity>
         <activity
-            android:name=".InicioPartidaActivity"
-            android:label="@string/title_activity_inicio_partida" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:name=".InicioPartidaActivity" >
+        </activity>
+        <activity
+            android:name=".UserSettings" >
         </activity>
     </application>
 </manifest>

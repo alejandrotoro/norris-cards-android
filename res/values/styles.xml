@@ -11,7 +11,7 @@
     <style name="settings_btn">
         <item name="android:layout_width">36dp</item>
         <item name="android:layout_height">36dp</item>
-        <item name="android:background">@drawable/config</item>
+        <item name="android:background">@drawable/settings</item>
         <item name="android:layout_marginLeft">10dp</item>
     </style>
         
