@@ -11,6 +11,11 @@
 # generated files
 gen/*
 .classpath
+.DS_Store
+*.DS_Store
+
 # Local configuration file (sdk path, etc)
 local.properties
 
+# bin files
+bin/jarlist.cache
