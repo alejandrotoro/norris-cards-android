@@ -4,8 +4,8 @@ import com.norris.cards.Global;
 
 public class Global {
 	static private Global instance = null;
-	private String production = "http://norris-cards.herokuapp.com";
-	private String development = "http://192.168.0.10:3000";
+	private String development = "http://norris-cards.herokuapp.com";
+	private String production = "http://192.168.0.13:3000";
 	private String userEmail;
 	private String usuario;
 	private Integer userId;
