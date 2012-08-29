@@ -16,6 +16,11 @@ public class Dashboard extends Activity {
 		startActivity(intent);
 	}
 	
+	public void settings(View view){
+		Intent intent = new Intent(Dashboard.this, UserSettings.class);
+		startActivity(intent);
+	}
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
