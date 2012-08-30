@@ -3,7 +3,7 @@ package com.norris.cards;
 import com.norris.cards.Global;
 
 public class Global {
-	static private Global instance = null;
+	static private Global instance = null; //
 	private String production = "http://norris-cards.herokuapp.com";
 	private String development = "http://192.168.0.13:3000";
 	private String userEmail;
